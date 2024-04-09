@@ -7,3 +7,4 @@ public class GridObjectSO : ScriptableObject
     public Vector2Int _Size;
     public GameObject _Prefab;
 }
+
