@@ -68,55 +68,33 @@ public class GridManager : MonoBehaviour
     [ContextMenu("Actions/Print Grid Contents")]
     public void PrintGrid() => RunThroughGrid((gObj) => Debug.Log(gObj.ToString()));
 
-    public void RunThroughGrid(Action<int, int> func)
+    public void RunThroughGrid(Action<int, int> func) => RunThroughGrid(new Vector2Int(0, 0), _gridSize, func);
+    public void RunThroughGrid(Action<GridObject> func) => RunThroughGrid(new Vector2Int(0, 0), _gridSize, func);
+    public void RunThroughGrid(Vector2Int origin, Vector2Int spread, Action<int, int> func, Direction dir = 0)
     {
-        if (_Grid == null) GenerateGrid();
-
-        for (int x = 0; x < _gridSize.x; x++)
-        {
-            for (int y = 0; y < _gridSize.y; y++)
-            {
-                func(x, y);
-            }
-        }
+        CellRunner(origin, spread, dir, (x,y) => func(x,y));
     }
 
-    public void RunThroughGrid(Action<GridObject> func)
+    public void RunThroughGrid(Vector2Int origin, Vector2Int spread, Action<GridObject> func, Direction dir = 0)
     {
-        if (_Grid == null) GenerateGrid();
-
-        for (int x = 0; x < _gridSize.x; x++)
-        {
-            for (int y = 0; y < _gridSize.y; y++)
-            {
-                func(_Grid[x, y]);
-            }
-        }
+        CellRunner(origin, spread, dir, (x, y) => func(_Grid[x, y]));
     }
 
-    public void RunThroughGrid(Vector2Int origin, Vector2Int spread, Action<int, int> func)
+    private void CellRunner(Vector2Int origin, Vector2Int spread, Direction dir, Action<int, int> cellAction)
     {
-        if (_Grid == null) GenerateGrid();
+        //int incr = (int)dir <= 1 ? 1 : -1; //[0,1] is N,E [2,3] is S,W
 
-        for (int x = origin.x; x < origin.x + spread.x; x++)
+        bool verFirst = (int)dir % 2 != 0;
+        int sign = (int)dir <= 1 ? 1 : -1;
+
+        Vector2Int start = verFirst ? new Vector2Int(origin.x, origin.y) : new Vector2Int(origin.y, origin.x);
+        Vector2Int size = verFirst ? new Vector2Int(spread.x, spread.y) : new Vector2Int(spread.y, spread.x);
+
+        for (int x = start.x; x != start.x + size.x * sign; x += 1)
         {
-            for (int y = origin.y; y < origin.y + spread.y; y++)
+            for (int y = start.y; y != start.y + size.y * sign; y += 1)
             {
-                func(x, y);
-            }
-        }
-    }
-
-    public void RunThroughGrid(Vector2Int origin, Vector2Int spread, Action<GridObject> func)
-    {
-        if (_Grid == null) GenerateGrid();
-
-        for (int x = origin.x; x < origin.x + spread.x; x++)
-        {
-            for (int y = origin.y; y < origin.y + spread.y; y++)
-            {
-                if(AreCoordsOnGrid(x, y))
-                func(_Grid[x, y]);
+                cellAction(x, y);
             }
         }
     }

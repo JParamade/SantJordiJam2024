@@ -3,32 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using CustomMethods;
 
-public class PreviewObject
-{
-    public GameObject _Instance;
-    public MeshRenderer[] _Renderers;
-
-    public Transform transform
-    {
-        get { return _Instance.transform; }
-    }
-
-    public void SetActive(bool set)
-    {
-        _Instance.SetActive(set);
-    }
-
-    public PreviewObject(GameObject instance)
-    {
-        _Instance = instance;
-
-        _Renderers = _Instance.GetComponentsInChildren<MeshRenderer>();
-
-        foreach (MeshRenderer rend in _Renderers)
-            rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-    }
-}
-
 public class ObjectPlacer : MonoBehaviour
 {
     #region Fields
@@ -40,6 +14,7 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] string _buildButtonName;
     [SerializeField] string _placeButtonName;
     [SerializeField] string _deleteButtonName;
+    [SerializeField] string _rotateAxisName;
     [SerializeField] LayerMask _placeableLayerMask;
 
     [Space(3), Header("Visuals"), Space(3)]
@@ -96,8 +71,10 @@ public class ObjectPlacer : MonoBehaviour
 
             _currentPreview.transform.position = currCell._Position;
 
+            _currentPreview.transform.Rotate(new Vector3(0f, 90f * Input.GetAxisRaw(_rotateAxisName), 0f));
+
             foreach (MeshRenderer rend in _currentPreview._Renderers)
-                rend.material.SetColor("_MainColor", ExtendedDataUtility.Select(IsThereRoom(currCell._Coords, _selectedObj._Size), _canPlaceColor, _cannotPlaceColor));
+                rend.material.SetColor("_MainColor", ExtendedDataUtility.Select(IsThereRoom(currCell._Coords, _selectedObj._Size, (int)_currentPreview.transform.rotation.eulerAngles.y), _canPlaceColor, _cannotPlaceColor));
         }
     }
 
@@ -156,31 +133,34 @@ public class ObjectPlacer : MonoBehaviour
 
     private bool TryPlace()
     {
-        if (_selectedObj == null || _playerState != PlayerState.Building) return false;
+        if (_selectedObj == null || _currentPreview == null || _playerState != PlayerState.Building) return false;
+
+        Quaternion rot = _currentPreview.transform.rotation;
 
         SetIsBuilding(false);
 
         Vector2Int coords = _gridManager.WorldPosToCoords(GetMouseWorldPos());
 
-        if (IsThereRoom(coords, _selectedObj._Size))
+        if (IsThereRoom(coords, _selectedObj._Size, (int)rot.eulerAngles.y))
         {
-            GameObject go = Instantiate(_selectedObj._Prefab, _gridManager._Grid[coords.x, coords.y]._Position, Quaternion.identity);
+            GameObject go = Instantiate(_selectedObj._Prefab, _gridManager._Grid[coords.x, coords.y]._Position, rot);
             go.transform.SetParent(_gridManager.transform);
-            _gridManager.RunThroughGrid(coords, _selectedObj._Size, (gObj) => gObj._Occupant = go);
+            _gridManager.RunThroughGrid(coords, _selectedObj._Size, (gObj) => gObj._Occupant = go, (Direction)((int)rot.eulerAngles.y / 90));
 
             return true;
         }
         else return false;
     }
 
-    private bool IsThereRoom(Vector2Int origin, Vector2Int spread)
+    private bool IsThereRoom(Vector2Int origin, Vector2Int spread, int yRot)
     {
         bool isRoom = true;
 
         //All current spaces need to be InBounds and Unoccupied
-        _gridManager.RunThroughGrid(origin, spread, (x, y) => {
+        _gridManager.RunThroughGrid(origin, spread, (x, y) =>
+        { 
             if (!_gridManager.AreCoordsOnGrid(x, y) || (_gridManager.AreCoordsOnGrid(x, y)) && _gridManager._Grid[x, y]._Occupant != null) isRoom = false;
-        });
+        }, (Direction)(yRot / 90));
 
         return isRoom;
     }
@@ -193,4 +173,30 @@ public class ObjectPlacer : MonoBehaviour
     }
 
     #endregion
+}
+
+public class PreviewObject
+{
+    public GameObject _Instance;
+    public MeshRenderer[] _Renderers;
+
+    public Transform transform
+    {
+        get { return _Instance.transform; }
+    }
+
+    public void SetActive(bool set)
+    {
+        _Instance.SetActive(set);
+    }
+
+    public PreviewObject(GameObject instance)
+    {
+        _Instance = instance;
+
+        _Renderers = _Instance.GetComponentsInChildren<MeshRenderer>();
+
+        foreach (MeshRenderer rend in _Renderers)
+            rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+    }
 }
