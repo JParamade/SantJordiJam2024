@@ -33,7 +33,7 @@ public class ObjectPlacer : MonoBehaviour
     private Dictionary<GridObjectSO, PreviewObject> _previewObjects;
     private PreviewObject _currentPreview;
     private PlayerState _playerState;
-
+    public Direction _direc;
     public enum PlayerState { Idle, Building }
 
     #endregion

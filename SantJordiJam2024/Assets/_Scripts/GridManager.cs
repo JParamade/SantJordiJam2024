@@ -82,21 +82,67 @@ public class GridManager : MonoBehaviour
 
     private void CellRunner(Vector2Int origin, Vector2Int spread, Direction dir, Action<int, int> cellAction)
     {
-        //int incr = (int)dir <= 1 ? 1 : -1; //[0,1] is N,E [2,3] is S,W
+        spread = (int)dir % 2 == 0? spread : new Vector2Int(spread.y, spread.x); //transpose spread on East(1) and West(3)
+        int xDir = (int)dir <= 1 ? 1 : -1; //inverse xDir on South(2) and West(3)
+        int yDir = (int)dir is 0 or 3 ? 1 : -1; //inverse yDir on East(1) and South(2)
 
-        bool verFirst = (int)dir % 2 != 0;
-        int sign = (int)dir <= 1 ? 1 : -1;
-
-        Vector2Int start = verFirst ? new Vector2Int(origin.x, origin.y) : new Vector2Int(origin.y, origin.x);
-        Vector2Int size = verFirst ? new Vector2Int(spread.x, spread.y) : new Vector2Int(spread.y, spread.x);
-
-        for (int x = start.x; x != start.x + size.x * sign; x += 1)
+        for (int x = origin.x; x != origin.x + spread.x * xDir; x += xDir)
         {
-            for (int y = start.y; y != start.y + size.y * sign; y += 1)
+            for (int y = origin.y; y != origin.y + spread.y * yDir; y += yDir)
             {
                 cellAction(x, y);
             }
         }
+
+        /*
+        switch (dir)
+        {
+            case Direction.North: //'X and 'Y go UP, DON'T TRANSPOSE spread
+            default:
+
+                for (int x = origin.x; x != origin.x + spread.x; x++)
+                {
+                    for (int y = origin.y; y != origin.y + spread.y; y++)
+                    {
+                        cellAction(x, y);
+                    }
+                }
+
+                break;
+            case Direction.East: //'Y goes DOWN. TRANSPOSE spread
+
+                for (int x = origin.x; x != origin.x + spread.y; x++)
+                {
+                    for (int y = origin.y; y != origin.y - spread.x; y--)
+                    {
+                        cellAction(x, y);
+                    }
+                }
+
+                break;
+            case Direction.South: //'X and 'Y go DOWN. DON'T TRANSPOSE SPREAD
+
+                for (int x = origin.x; x != origin.x - spread.x; x--)
+                {
+                    for (int y = origin.y; y != origin.y - spread.y; y--)
+                    {
+                        cellAction(x, y);
+                    }
+                }
+
+                break;
+            case Direction.West: //'X goes DOWN. TRANSPOSE SPREAD
+
+                for (int x = origin.x; x != origin.x - spread.y; x--)
+                {
+                    for (int y = origin.y; y != origin.y + spread.x; y++)
+                    {
+                        cellAction(x, y);
+                    }
+                }
+
+                break;
+        }*/
     }
 
     #endregion
