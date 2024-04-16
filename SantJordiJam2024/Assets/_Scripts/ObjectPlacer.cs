@@ -32,9 +32,7 @@ public class ObjectPlacer : MonoBehaviour
 
     private Dictionary<GridObjectSO, PreviewObject> _previewObjects;
     private PreviewObject _currentPreview;
-    private PlayerState _playerState;
-    public Direction _direc;
-    public enum PlayerState { Idle, Building }
+    [HideInInspector] public PlayerState _PlayerState;
 
     #endregion
 
@@ -58,14 +56,14 @@ public class ObjectPlacer : MonoBehaviour
         //INPUTS
         if (Input.GetButtonDown(_buildButtonName))
         {
-            if (_playerState == PlayerState.Idle) SetIsBuilding(true);
+            if (_PlayerState == PlayerState.Idle) SetIsBuilding(true);
             else SetIsBuilding(false);
         }
         else if (Input.GetButtonDown(_placeButtonName)) TryPlace();
         else if (Input.GetButtonDown(_deleteButtonName)) TryDestroy();
 
         //BUILDING
-        if (_playerState == PlayerState.Building && _currentPreview != null)
+        if (_PlayerState == PlayerState.Building && _currentPreview != null)
         {
             GridObject currCell = _gridManager.WorldPosToCell(GetMouseWorldPos());
 
@@ -83,7 +81,7 @@ public class ObjectPlacer : MonoBehaviour
     #region Methods
     private void ChangeSelection(GridObjectSO sel)
     {
-        if (_playerState == PlayerState.Building && _currentPreview != null && _selectedObj != sel)
+        if (_PlayerState == PlayerState.Building && _currentPreview != null && _selectedObj != sel)
         {
             UpdatePreviewObject(_selectedObj, false);
             UpdatePreviewObject(sel, true);
@@ -96,7 +94,7 @@ public class ObjectPlacer : MonoBehaviour
     {
         if(_selectedObj == null) return;
 
-        _playerState = set? PlayerState.Building : PlayerState.Idle;
+        _PlayerState = set? PlayerState.Building : PlayerState.Idle;
 
         UpdatePreviewObject(_selectedObj, set);
     }
@@ -133,7 +131,7 @@ public class ObjectPlacer : MonoBehaviour
 
     private bool TryPlace()
     {
-        if (_selectedObj == null || _currentPreview == null || _playerState != PlayerState.Building) return false;
+        if (_selectedObj == null || _currentPreview == null || _PlayerState != PlayerState.Building) return false;
 
         Quaternion rot = _currentPreview.transform.rotation;
 

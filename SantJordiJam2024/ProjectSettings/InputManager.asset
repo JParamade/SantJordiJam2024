@@ -70,7 +70,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Place
+    m_Name: Primary
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -86,11 +86,11 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Jump
+    m_Name: Tertiary
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: space
+    positiveButton: mouse 2
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
