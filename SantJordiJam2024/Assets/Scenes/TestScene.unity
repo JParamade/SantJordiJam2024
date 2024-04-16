@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.17893565, g: 0.22405519, b: 0.30590114, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -566,7 +566,7 @@ Transform:
   m_GameObject: {fileID: 937205887}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -80, y: 80, z: -80}
+  m_LocalPosition: {x: -130.1, y: 106.2, z: -130.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -587,24 +587,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectPlacer: {fileID: 1162862351}
   _camera: {fileID: 963194227}
-  _movementTransform: {fileID: 0}
+  _movementTransform: {fileID: 937205888}
   _closeCam:
+    _DragSpeed: {x: 5, y: 20}
+    _ZoomSpeed: 1
+    _DefaultZoom: 16
+    _Bounds: {x: 40, y: 22.5}
+    _ZoomRange: {x: 4, y: 24}
+    _TransTime: 0.5
+  _midCam:
     _DragSpeed: {x: 2, y: 16}
     _ZoomSpeed: 1
-    _DefaultZoom: 20
-    _ZoomRange: {x: 4, y: 24}
-    _TransTime: 1
-  _midCam:
-    _DragSpeed: {x: 1, y: 1}
-    _ZoomSpeed: 1
-    _DefaultZoom: 26
-    _ZoomRange: {x: 24, y: 32}
+    _DefaultZoom: 25
+    _Bounds: {x: 3, y: 3}
+    _ZoomRange: {x: 24, y: 26}
     _TransTime: 1
   _farCam:
     _DragSpeed: {x: 0, y: 0}
-    _ZoomSpeed: 5
+    _ZoomSpeed: 1
     _DefaultZoom: 48
-    _ZoomRange: {x: 32, y: 48}
+    _Bounds: {x: 1, y: 1}
+    _ZoomRange: {x: 47, y: 48}
     _TransTime: 1
 --- !u!1 &963194225
 GameObject:
@@ -685,7 +688,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

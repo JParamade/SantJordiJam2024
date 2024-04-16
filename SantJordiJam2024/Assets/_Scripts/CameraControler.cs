@@ -40,13 +40,17 @@ public class CameraControler : MonoBehaviour
 
     private void LateUpdate()
     {
-        _camera.transform.localPosition = Vector3.forward * -(30f + _camera.orthographicSize);
+        Vector3 movement = _camera.transform.localPosition;
 
-        if (_dragging && _objectPlacer._PlayerState == PlayerState.Idle)
+        if (_dragging && _objectPlacer._PlayerState == PlayerState.Idle && !DOTween.IsTweening(_camera))
         {
-            Vector3 pos = (transform.right * _mouseDelta.x + transform.up * _mouseDelta.y) * -Mathf.Lerp(_currentCamLevel._DragSpeed.x, _currentCamLevel._DragSpeed.y, (_camera.orthographicSize - _currentCamLevel._ZoomRange.x)/ _currentCamLevel._ZoomRange.y) ;
-            transform.position += pos * Time.deltaTime;
+            movement += (Vector3)_mouseDelta * Time.deltaTime * -Mathf.Lerp(_currentCamLevel._DragSpeed.x, _currentCamLevel._DragSpeed.y, (_camera.orthographicSize - _currentCamLevel._ZoomRange.x) / _currentCamLevel._ZoomRange.y);
         }
+        movement.x = Mathf.Clamp(movement.x, -_currentCamLevel._Bounds.x, _currentCamLevel._Bounds.x);
+        movement.y = Mathf.Clamp(movement.y, -_currentCamLevel._Bounds.y, _currentCamLevel._Bounds.y);
+        movement.z = -(100f + _camera.orthographicSize);
+
+        _camera.transform.localPosition = movement;
     }
 
     #endregion
@@ -61,35 +65,37 @@ public class CameraControler : MonoBehaviour
 
     private void Zoom(float zoom)
     {
-        _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize + zoom, _closeCam._ZoomRange.x, _farCam._ZoomRange.y);
-        _currentCamLevel = DetermineCamLevel();
-        //transform.position -= transform.forward * _camera.orthographicSize;
+        if (_objectPlacer._PlayerState == PlayerState.Idle && !DOTween.IsTweening(_camera))
+        {
+            _camera.orthographicSize = Mathf.Clamp(_camera.orthographicSize + zoom, _closeCam._ZoomRange.x, _farCam._ZoomRange.y);
+            _currentCamLevel = DetermineCamLevel();
+        }
     }
 
     private CamLevel DetermineCamLevel()
     {
         //CLOSE
-        if (_camera.orthographicSize >= _closeCam._ZoomRange.x && _camera.orthographicSize < _closeCam._ZoomRange.y && _currentCamLevel != _closeCam)
+        if (_camera.orthographicSize >= _closeCam._ZoomRange.x && _camera.orthographicSize < _midCam._ZoomRange.x && _currentCamLevel != _closeCam && !DOTween.IsTweening(_camera))
         {
-            return CamTransition(_closeCam);
+            return CamTransition(_closeCam, false);
         }
         //MID
-        else if (_camera.orthographicSize >= _midCam._ZoomRange.x && _camera.orthographicSize < _midCam._ZoomRange.y && _currentCamLevel != _midCam)
+        else if (_camera.orthographicSize >= _closeCam._ZoomRange.y && _camera.orthographicSize < _farCam._ZoomRange.x && _currentCamLevel != _midCam && !DOTween.IsTweening(_camera))
         {
-            return CamTransition(_midCam);
+            return CamTransition(_midCam, true);
         }
         //FAR
-        else if (_camera.orthographicSize >= _farCam._ZoomRange.x && _currentCamLevel != _farCam)
+        else if (_camera.orthographicSize > _midCam._ZoomRange.y && _currentCamLevel != _farCam && !DOTween.IsTweening(_camera))
         {
-            return CamTransition(_farCam);
+            return CamTransition(_farCam, true);
         }
         else return _currentCamLevel; //no changes
     }
 
-    private CamLevel CamTransition(CamLevel cam)
+    private CamLevel CamTransition(CamLevel cam, bool moveToOrigin)
     {
         _camera.DOOrthoSize(cam._DefaultZoom, cam._TransTime);
-        transform.DOMove(new Vector3(-80f, transform.position.y, -80f), cam._TransTime);
+        if (moveToOrigin) _camera.transform.DOLocalMove(new Vector3(0f, 0f, _camera.transform.localPosition.z), cam._TransTime);
         return cam;
     }
 
@@ -105,6 +111,7 @@ public class CamLevel
 
     [Space(3), Header("Range"), Space(3)]
     public float _DefaultZoom;
+    public Vector2 _Bounds;
     public Vector2 _ZoomRange;
 
     [Space(3), Header("Animation"), Space(3)]
