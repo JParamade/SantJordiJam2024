@@ -59,4 +59,6 @@ public class MenuCanvasController : MonoBehaviour
     public void BookOpened() {
         cmpCameraAnimator.SetBool("zoom", cmpAnimator.GetCurrentAnimatorStateInfo(0).speed > 0 ? true : false);
     }
+
+
 }
