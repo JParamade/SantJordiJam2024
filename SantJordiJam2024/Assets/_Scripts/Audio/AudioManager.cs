@@ -26,10 +26,6 @@ public class AudioManager : MonoBehaviour
         menuCanvasController = FindObjectOfType<MenuCanvasController>();
     }
 
-    private void Update()
-    {
-        masterBus.setVolume(masterVolume);
-        musicBus.setVolume(musicVolume);
-        sfxBus.setVolume(sfxVolume);
-    }
+    // private void ChangeVolume(VolumeType volumeType) {
+    // }
 }

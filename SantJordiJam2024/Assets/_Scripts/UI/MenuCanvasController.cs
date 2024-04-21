@@ -60,5 +60,5 @@ public class MenuCanvasController : MonoBehaviour
         cmpCameraAnimator.SetBool("zoom", cmpAnimator.GetCurrentAnimatorStateInfo(0).speed > 0 ? true : false);
     }
 
-
+    
 }

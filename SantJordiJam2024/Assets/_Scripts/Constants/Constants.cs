@@ -7,3 +7,9 @@ public class UINames {
     public static readonly string UI_SETTINGS = "";
     public static readonly string UI_CREDITS = "";
 }
+
+public enum VolumeType { 
+    MASTER, 
+    MUSIC, 
+    SFX 
+}
