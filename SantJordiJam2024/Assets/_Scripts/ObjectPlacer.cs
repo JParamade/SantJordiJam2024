@@ -72,7 +72,7 @@ public class ObjectPlacer : MonoBehaviour
             _currentPreview.transform.Rotate(new Vector3(0f, 90f * Input.GetAxisRaw(_rotateAxisName), 0f));
 
             foreach (MeshRenderer rend in _currentPreview._Renderers)
-                rend.material.SetColor("_MainColor", ExtendedDataUtility.Select(IsThereRoom(currCell._Coords, _selectedObj._Size, (int)_currentPreview.transform.rotation.eulerAngles.y), _canPlaceColor, _cannotPlaceColor));
+                rend.material.SetColor("_BaseColor", ExtendedDataUtility.Select(IsThereRoom(currCell._Coords, _selectedObj._Size, (int)_currentPreview.transform.rotation.eulerAngles.y), _canPlaceColor, _cannotPlaceColor));
         }
     }
 
