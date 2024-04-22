@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
@@ -14,9 +15,14 @@ public class MenuCanvasController : MonoBehaviour
     private bool startTimer = false;
     private float timerTime = 0.1f;
 
+    private CameraBehaviour cameraBehaviour;
+
     private void Start() {
         cmpAnimator = GetComponent<Animator>();
         cmpCameraAnimator = Camera.main.GetComponent<Animator>();
+
+        cameraBehaviour = FindObjectOfType<CameraBehaviour>();
+        cameraBehaviour.CameraAnimationEnded += CameraAnimEnded;
     }
 
     private void Update() {
@@ -60,5 +66,8 @@ public class MenuCanvasController : MonoBehaviour
         cmpCameraAnimator.SetBool("zoom", cmpAnimator.GetCurrentAnimatorStateInfo(0).speed > 0 ? true : false);
     }
 
-    
+    public void CameraAnimEnded(object sender, EventArgs e) {
+        GameState(true);
+        cameraBehaviour.CameraAnimationEnded -= CameraAnimEnded;
+    }
 }
