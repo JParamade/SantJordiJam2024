@@ -609,7 +609,6 @@ GameObject:
   - component: {fileID: 328395174}
   - component: {fileID: 328395173}
   - component: {fileID: 328395172}
-  - component: {fileID: 328395171}
   m_Layer: 0
   m_Name: Granja Camera
   m_TagString: Untagged
@@ -632,37 +631,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 444133046}
   m_LocalEulerAnglesHint: {x: 2.766, y: -68.464, z: 1.759}
---- !u!114 &328395171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328395169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 292597493
-      Data2: 1178852828
-      Data3: -161311047
-      Data4: -1409163161
-    Path: event:/Music/Day1-2Music
-  Event: 
-  PlayEvent: 11
-  StopEvent: 12
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!114 &328395172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,7 +751,6 @@ GameObject:
   - component: {fileID: 344802702}
   - component: {fileID: 344802701}
   - component: {fileID: 344802700}
-  - component: {fileID: 344802699}
   m_Layer: 0
   m_Name: Aserradero Camera
   m_TagString: Untagged
@@ -806,37 +773,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 444133046}
   m_LocalEulerAnglesHint: {x: 6.284, y: 174.019, z: -0.457}
---- !u!114 &344802699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 344802697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 292597493
-      Data2: 1178852828
-      Data3: -161311047
-      Data4: -1409163161
-    Path: event:/Music/Day1-2Music
-  Event: 
-  PlayEvent: 11
-  StopEvent: 12
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!114 &344802700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1892,7 +1828,6 @@ GameObject:
   - component: {fileID: 774856578}
   - component: {fileID: 774856577}
   - component: {fileID: 774856576}
-  - component: {fileID: 774856575}
   m_Layer: 0
   m_Name: Mina Camera
   m_TagString: Untagged
@@ -1915,37 +1850,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 444133046}
   m_LocalEulerAnglesHint: {x: 4.183, y: 5.547, z: 0.573}
---- !u!114 &774856575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774856573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 292597493
-      Data2: 1178852828
-      Data3: -161311047
-      Data4: -1409163161
-    Path: event:/Music/Day1-2Music
-  Event: 
-  PlayEvent: 11
-  StopEvent: 12
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!114 &774856576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2724,6 +2628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1562435005}
   - component: {fileID: 1562435006}
+  - component: {fileID: 1562435007}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -2761,6 +2666,37 @@ MonoBehaviour:
   masterVolume: 0.5
   musicVolume: 1
   sfxVolume: 1
+--- !u!114 &1562435007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562435004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2104275698
+      Data2: 1219975815
+      Data3: -916141929
+      Data4: -1677266128
+    Path: event:/Music/Day3-4Music
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1562913170
 GameObject:
   m_ObjectHideFlags: 0

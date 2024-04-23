@@ -352,7 +352,6 @@ GameObject:
   - component: {fileID: 194757318}
   - component: {fileID: 194757317}
   - component: {fileID: 194757316}
-  - component: {fileID: 194757315}
   m_Layer: 0
   m_Name: Mina Camera
   m_TagString: Untagged
@@ -375,37 +374,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 444133046}
   m_LocalEulerAnglesHint: {x: 7.999, y: 5.587, z: 0.947}
---- !u!114 &194757315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 194757313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 292597493
-      Data2: 1178852828
-      Data3: -161311047
-      Data4: -1409163161
-    Path: event:/Music/Day1-2Music
-  Event: 
-  PlayEvent: 11
-  StopEvent: 12
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!114 &194757316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10633,7 +10601,6 @@ GameObject:
   - component: {fileID: 692193767}
   - component: {fileID: 692193766}
   - component: {fileID: 692193765}
-  - component: {fileID: 692193764}
   m_Layer: 0
   m_Name: Aserradero Camera
   m_TagString: Untagged
@@ -10656,37 +10623,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 444133046}
   m_LocalEulerAnglesHint: {x: 1.033, y: 183.384, z: -0.191}
---- !u!114 &692193764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692193762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 292597493
-      Data2: 1178852828
-      Data3: -161311047
-      Data4: -1409163161
-    Path: event:/Music/Day1-2Music
-  Event: 
-  PlayEvent: 11
-  StopEvent: 12
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!114 &692193765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10807,7 +10743,6 @@ GameObject:
   - component: {fileID: 734497375}
   - component: {fileID: 734497373}
   - component: {fileID: 734497377}
-  - component: {fileID: 734497378}
   m_Layer: 0
   m_Name: Granja Camera
   m_TagString: Untagged
@@ -10938,37 +10873,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
---- !u!114 &734497378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734497372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 292597493
-      Data2: 1178852828
-      Data3: -161311047
-      Data4: -1409163161
-    Path: event:/Music/Day1-2Music
-  Event: 
-  PlayEvent: 11
-  StopEvent: 12
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &879296703
 GameObject:
   m_ObjectHideFlags: 0
@@ -11038,7 +10942,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 734497375}
+  m_Camera: {fileID: 2052367755}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -16231,6 +16135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1562435005}
   - component: {fileID: 1562435006}
+  - component: {fileID: 1562435007}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -16268,6 +16173,37 @@ MonoBehaviour:
   masterVolume: 0.5
   musicVolume: 1
   sfxVolume: 1
+--- !u!114 &1562435007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562435004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 292597493
+      Data2: 1178852828
+      Data3: -161311047
+      Data4: -1409163161
+    Path: event:/Music/Day1-2Music
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1680027312
 GameObject:
   m_ObjectHideFlags: 0
@@ -21242,8 +21178,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2052367756}
   - component: {fileID: 2052367755}
-  - component: {fileID: 2052367754}
   - component: {fileID: 2052367753}
+  - component: {fileID: 2052367757}
   m_Layer: 0
   m_Name: Top View Cam
   m_TagString: Untagged
@@ -21295,14 +21231,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!81 &2052367754
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052367752}
-  m_Enabled: 1
 --- !u!20 &2052367755
 Camera:
   m_ObjectHideFlags: 0
@@ -21369,6 +21297,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 444133046}
   m_LocalEulerAnglesHint: {x: 56.86, y: -85.066, z: 4.135}
+--- !u!114 &2052367757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052367752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &2109022396
 GameObject:
   m_ObjectHideFlags: 0
