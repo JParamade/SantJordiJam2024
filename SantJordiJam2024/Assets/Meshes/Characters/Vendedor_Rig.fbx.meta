@@ -3,12 +3,7 @@ guid: c583a3dac5ce0ae4abe8b32813e75f45
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Vendedor_sh
-    second: {fileID: 2100000, guid: cebe445660f021644a304310f2474783, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
